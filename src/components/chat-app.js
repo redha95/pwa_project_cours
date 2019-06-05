@@ -91,11 +91,14 @@ class ChatApp extends LitElement {
 
  addMessage(e) {
    this.messages = e.detail;
-   window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+   setTimeout(() => {
+    window.scrollTo(0, document.body.scrollHeight);   
+   },0);
  }
 
  handleLogin(e) {
    this.user = e.detail.user;
+   this.logged = true;
    
  }
 
@@ -143,8 +146,7 @@ class ChatApp extends LitElement {
            </chat-login>
           `: html` 
            <h1>Hi, ${this.user.email}</h1>
-         `
-       }
+
        <h1>Messages :</h1>
        <ul>
          ${this.messages.map(message => html`
@@ -165,6 +167,8 @@ class ChatApp extends LitElement {
            <button type="submit">Send</button>
          </form>
        </footer>
+       `
+       }
      </section>
    `;
  }
