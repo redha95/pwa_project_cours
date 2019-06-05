@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import './layout/navigation/chat-header.js';
 import './data/chat-data.js';
+import './data/chat-store.js';
 import './data/chat-auth.js';
 import './data/chat-login.js';
 
@@ -91,7 +92,11 @@ class ChatApp extends LitElement {
 
  addMessage(e) {
    this.messages = e.detail;
-   setTimeout(() => {
+   this.scrollDown();
+ }
+
+ scrollDown(){
+  setTimeout(() => {
     window.scrollTo(0, document.body.scrollHeight);   
    },0);
  }
@@ -99,18 +104,20 @@ class ChatApp extends LitElement {
  handleLogin(e) {
    this.user = e.detail.user;
    this.logged = true;
-   
+   this.scrollDown();
  }
 
  handleMessage(e) {
    e.preventDefault();
-   const database = firebase.database();
-   database.ref().child('messages').push({
+   if(!this.message) return;
+   const database = firebase.firestore();
+   database.collection('messages').add({
      content: this.message,
      date: new Date().getTime(),
      user: this.user.uid,
      email: this.user.email
    });
+   this.message = "";
  }
 
  getDate(timestamp) {
@@ -128,10 +135,11 @@ class ChatApp extends LitElement {
 
  render() {
    return html`
-     <chat-data
+     <!-- <chat-data
        path="messages"
        @child_changed="${this.addMessage}">
-     </chat-data>
+     </chat-data> -->
+     <chat-store collection="messages" @child_changed="${this.addMessage}"></chat-store>
      <section>
        <!-- <chat-header></chat-header> -->
        <!-- header -->
