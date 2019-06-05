@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Firebase</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href=""> -->
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: sans-serif;
+            background-color: #fefefe;
+            min-height: 100vh;
+            height: 100%;
+        }
+
+        chat-app {
+            display: block;
+            background-color: #ffffff;
+            border-bottom: solid 1px #eeeeee;
+        }
+
+        chat-app header {
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        chat-app img {
+            height: 42px;
+            width: 42px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="./config.js"></script>
+    <chat-app unresolved>
+        <header slot="header"><img src="./src/assets/images/1f680.png" alt=""></header>
+    </chat-app>   
+    <script type="module" src="./src/components/chat-app.js"></script>
+</body>
+
+</html>
